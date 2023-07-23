@@ -23,7 +23,7 @@ import {
   createProduct,
   updateProduct,
 } from "../../../features/products/productsServices";
-import useGetNestedSubcategories from "../../../common/hooks/subcategories/useGetNestedSubcategories";
+// import useGetNestedSubcategories from "../../../common/hooks/subcategories/useGetNestedSubcategories";
 
 export const CreateProductModal = ({
   modalState,
@@ -38,13 +38,13 @@ export const CreateProductModal = ({
   const [description, setDescription] = useState("");
   const [quantityInStock, setQuantityInStock] = useState("");
   const [category, setCategory] = useState("");
-  const [subcategories, setSubcategories] = useState([]);
+  // const [subcategories, setSubcategories] = useState([]);
   const [size, setSize] = useState([]);
   const [colors, setColors] = useState([]);
   const [image, setImage] = useState(null);
   const [sliderImages, setSliderImages] = useState(null);
 
-  const {nestedSubcategories} = useGetNestedSubcategories(category);
+  // const {nestedSubcategories} = useGetNestedSubcategories(category);
 
   const handleChangeName = (e) => {
     setName(e.target.value);
@@ -64,19 +64,19 @@ export const CreateProductModal = ({
   const handleChangeCategory = (e) => {
     setCategory(e.target.value);
   };
-  const subcategoriesSelectOptions = {
-    options: nestedSubcategories.subcategories,
-  };
-  const handleSelectSubcategory = (_, selectedItem) => {
-    setSubcategories((prevState) => {
-      return [...prevState, selectedItem._id];
-    });
-  };
-  const handleRemoveSubcategory = (_, removedItem) => {
-    setSubcategories((prevState) => {
-      return prevState.filter((item) => item !== removedItem._id);
-    });
-  };
+  // const subcategoriesSelectOptions = {
+  //   options: nestedSubcategories.subcategories,
+  // };
+  // const handleSelectSubcategory = (_, selectedItem) => {
+  //   setSubcategories((prevState) => {
+  //     return [...prevState, selectedItem._id];
+  //   });
+  // };
+  // const handleRemoveSubcategory = (_, removedItem) => {
+  //   setSubcategories((prevState) => {
+  //     return prevState.filter((item) => item !== removedItem._id);
+  //   });
+  // };
   const handleSize = (item, allItems) => {
     setSize(allItems);
   };
@@ -118,7 +118,7 @@ export const CreateProductModal = ({
     formData.set("quantityInStock", quantityInStock);
     formData.set("category", category);
     /*https://stackoverflow.com/questions/67245992/how-to-pass-array-to-formdata-and-save-as-array-in-react-js*/
-    subcategories.map((el) => formData.append("subcategories[]", el));
+    // subcategories.map((el) => formData.append("subcategories[]", el));
     size.map((el) => formData.append("size[]", el));
     colors.map((el) => formData.append("colors[]", el));
     if (image && image.length > 0) {
@@ -227,7 +227,7 @@ export const CreateProductModal = ({
             </Col>
           </Row>
 
-          {/* Subcategories */}
+          {/* Subcategories
           <div className="Input-Item">
             <Label>Subcategories</Label>
             <Multiselect
@@ -237,7 +237,7 @@ export const CreateProductModal = ({
               onRemove={handleRemoveSubcategory} // Function will trigger on remove event
               displayValue="name" // Property name to display in the dropdown options
             />
-          </div>
+          </div>*/}
 
           {/* Sizes */}
           <div className="Input-Item">
@@ -479,7 +479,7 @@ export const UpdateProductModal = ({
   const [description, setDescription] = useState("");
   const [quantityInStock, setQuantityInStock] = useState("");
   const [category, setCategory] = useState("");
-  const [subcategories, setSubcategories] = useState([]);
+  // const [subcategories, setSubcategories] = useState([]);
 
   const [size, setSize] = useState([]);
   const [colors, setColors] = useState([]);
@@ -498,7 +498,7 @@ export const UpdateProductModal = ({
       setDescription(product.description);
       setQuantityInStock(product.quantityInStock);
       setCategory(product.category._id);
-      setSubcategories(product.subcategories);
+      // setSubcategories(product.subcategories);
       setSize(product.size);
       setColors(product.colors);
       setProductImage(product.image);
@@ -524,22 +524,22 @@ export const UpdateProductModal = ({
   const handleChangeCategory = (e) => {
     setCategory(e.target.value);
   };
-  const {nestedSubcategories} = useGetNestedSubcategories(category);
-  const subcategoriesSelectOptions = {
-    options: nestedSubcategories.subcategories,
-    selectedValue: subcategories,
-  };
+  // const {nestedSubcategories} = useGetNestedSubcategories(category);
+  // const subcategoriesSelectOptions = {
+  //   options: nestedSubcategories.subcategories,
+  //   selectedValue: subcategories,
+  // };
 
-  const handleSelectSubcategory = (_, selectedItem) => {
-    setSubcategories((prevState) => {
-      return [...prevState, selectedItem];
-    });
-  };
-  const handleRemoveSubcategory = (_, removedItem) => {
-    setSubcategories((prevState) => {
-      return prevState.filter((item) => item._id !== removedItem._id);
-    });
-  };
+  // const handleSelectSubcategory = (_, selectedItem) => {
+  //   setSubcategories((prevState) => {
+  //     return [...prevState, selectedItem];
+  //   });
+  // };
+  // const handleRemoveSubcategory = (_, removedItem) => {
+  //   setSubcategories((prevState) => {
+  //     return prevState.filter((item) => item._id !== removedItem._id);
+  //   });
+  // };
   const handleSize = (item, allItems) => {
     setSize(allItems);
   };
@@ -574,10 +574,10 @@ export const UpdateProductModal = ({
     formData.set("category", category);
 
     //Refactor selected subcategories to get form ["_id1", "_id2", ...]
-    if (subcategories.length > 0) {
-      const subIds = subcategories.map((item) => item._id);
-      subIds.map((el) => formData.append("subcategories[]", el));
-    }
+    // if (subcategories.length > 0) {
+    //   const subIds = subcategories.map((item) => item._id);
+    //   subIds.map((el) => formData.append("subcategories[]", el));
+    // }
 
     size.map((el) => formData.append("size[]", el));
     colors.map((el) => formData.append("colors[]", el));
@@ -692,17 +692,17 @@ export const UpdateProductModal = ({
             </Col>
           </Row>
 
-          {/* Subcategories */}
-          <div className="Input-Item">
-            <Label>Subcategories</Label>
-            <Multiselect
-              options={subcategoriesSelectOptions.options} // Options to display in the dropdown
-              selectedValues={subcategoriesSelectOptions.selectedValue} // Preselected value to persist in dropdown
-              onSelect={handleSelectSubcategory} // Function will trigger on select event
-              onRemove={handleRemoveSubcategory} // Function will trigger on remove event
-              displayValue="name" // Property name to display in the dropdown options
-            />
-          </div>
+          {/*/!* Subcategories *!/*/}
+          {/*<div className="Input-Item">*/}
+          {/*  <Label>Subcategories</Label>*/}
+          {/*  <Multiselect*/}
+          {/*    options={subcategoriesSelectOptions.options} // Options to display in the dropdown*/}
+          {/*    selectedValues={subcategoriesSelectOptions.selectedValue} // Preselected value to persist in dropdown*/}
+          {/*    onSelect={handleSelectSubcategory} // Function will trigger on select event*/}
+          {/*    onRemove={handleRemoveSubcategory} // Function will trigger on remove event*/}
+          {/*    displayValue="name" // Property name to display in the dropdown options*/}
+          {/*  />*/}
+          {/*</div>*/}
 
           {/* Sizes */}
           <div className="Input-Item">

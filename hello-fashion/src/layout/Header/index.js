@@ -69,9 +69,9 @@ const Header = () => {
                                             color="light"
                                         >
                                             <img
-                                                src={userProfile?.user?.image}
+                                                src={userProfile?.user?.image? userProfile?.user?.image : ""}
                                                 alt="user-img"
-                                                width={40}
+                                                width={24}
                                                 className="rounded-circle"
                                             />
                                         </DropdownToggle>

@@ -9,7 +9,7 @@ const Home = () => {
     <>
       <PageHelmet title={"Home"} />
       <HomeBannersSection />
-      <HomeCategoriesSection />
+      {/*<HomeCategoriesSection />*/}
       <HomeCarouselSection />
     </>
   );

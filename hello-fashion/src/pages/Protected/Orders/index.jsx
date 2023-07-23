@@ -44,7 +44,7 @@ const Orders = () => {
                         year: "numeric",
                       })}
                     </td>
-                    <td>$ {item.totalOrderPrice}</td>
+                    <td>Rs. {item.totalOrderPrice}</td>
                     <td>
                       {item.paymentMethod === "cash" && (
                         <Badge color="primary" className="rounded">

@@ -58,10 +58,10 @@ const ProductCard = ({
           </div>
           {/* Price&Discount */}
           <div className="d-flex justify-content-between">
-            <span style={{color: "#ff6262"}}>${price - discount}</span>
+            <span style={{color: "#ff6262"}}>Rs.{price - discount}</span>
             {discount > 0 && (
               <span className="text-muted text-decoration-line-through">
-                ${price}
+                Rs.{price}
               </span>
             )}
           </div>

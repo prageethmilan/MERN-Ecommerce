@@ -16,7 +16,7 @@ const BannersCarousel = () => {
       ) : (
         <>
           <Carousel
-            showArrows={false}
+            showArrows={true}
             showStatus={false}
             showThumbs={false}
             transitionTime={800}

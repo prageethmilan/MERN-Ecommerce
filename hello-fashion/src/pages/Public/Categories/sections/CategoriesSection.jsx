@@ -25,6 +25,7 @@ const CategoriesSection = ({withSlice}) => {
                   <ImageLoader
                     image={item?.image}
                     style={{width: "100%", height: "auto"}}
+                    name={item.name}
                   />
                 </Link>
               </Col>

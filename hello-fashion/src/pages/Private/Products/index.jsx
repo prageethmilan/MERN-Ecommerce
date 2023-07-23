@@ -105,10 +105,10 @@ const Products = () => {
                         {item.name.toUpperCase()}
                       </td>
                       <td style={{fontSize: "13px", color: "red"}}>
-                        ${item.price}
+                        Rs. {item.price}
                       </td>
                       <td style={{fontSize: "13px", color: "gray"}}>
-                        {item.discount === 0 ? "_" : `$${item.discount}`}
+                        {item.discount === 0 ? "_" : `Rs.${item.discount}`}
                       </td>
                       <td style={{fontSize: "13px"}}>
                         <Badge color="info">{item?.category?.name}</Badge>

@@ -1,13 +1,14 @@
 import {fileURLToPath} from 'url';
 import path from 'path';
 import express from 'express';
-import mongoose from "mongoose";
 import dotenv from 'dotenv';
 import cors from 'cors';
 import helmet from 'helmet';
 import morgan from 'morgan';
 import mongoSanitize from "express-mongo-sanitize";
 import routes from './routes/index.js';
+import APIError from "./utils/apiError.utils.js";
+import connectToDB from "./config/db.js";
 
 dotenv.config();
 const app = express();
@@ -16,11 +17,13 @@ app.options('*', cors());
 
 const PORT = process.env.PORT || 4000;
 
-mongoose.set('strictQuery', false);
-mongoose.connect(process.env.MONGODB_URI,{useNewUrlParser: true});
-mongoose.connection.on('open', () => {
-    console.log("Database Connected");
-})
+// mongoose.set('strictQuery', false);
+// mongoose.connect(process.env.MONGODB_URI,{useNewUrlParser: true});
+// mongoose.connection.on('open', () => {
+//     console.log("Database Connected");
+// })
+
+connectToDB();
 
 const server = app.listen(PORT, () => {
     console.log(`App starting on ${PORT}`);
@@ -41,6 +44,10 @@ app.use(express.json({limit: '15kb'}));
 app.use(mongoSanitize());
 
 app.use(routes);
+
+app.all("*", (req, res, next) => {
+    next(new APIError(`Can't find ${req.originalUrl} on this server!`, 404));
+});
 
 
 process.on("uncaughtException", (err) => {

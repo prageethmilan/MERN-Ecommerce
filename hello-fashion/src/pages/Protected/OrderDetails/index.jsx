@@ -93,7 +93,7 @@ const OrderDetails = () => {
                 <h3>Order Info</h3>
                 <div className="d-flex flex-column gap-3">
                   <div>
-                    <span className="fw-bold">Total Price :</span>&nbsp;$
+                    <span className="fw-bold">Total Price :</span>&nbsp;Rs.
                     {orderDetails?.order?.totalOrderPrice}
                   </div>
                   <span style={{fontSize: "12px"}} className="text-muted">

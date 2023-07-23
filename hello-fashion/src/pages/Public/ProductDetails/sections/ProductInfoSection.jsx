@@ -156,13 +156,13 @@ const ProductInfoSection = () => {
                 {/* Price - Discount */}
                 <ListGroupItem>
                   <span style={{color: "#ff6262"}}>
-                    $
+                    Rs.
                     {productDetails?.product?.price -
                       productDetails?.product?.discount}
                   </span>{" "}
                   {productDetails?.product?.discount > 0 && (
                     <span className="text-muted text-decoration-line-through">
-                      ${productDetails?.product?.price}
+                      Rs.{productDetails?.product?.price}
                     </span>
                   )}
                 </ListGroupItem>

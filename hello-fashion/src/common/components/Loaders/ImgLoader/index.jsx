@@ -1,7 +1,7 @@
 import React, {useState} from "react";
 import BlockLoader from "../BlockLoader";
 
-const ImageLoader = ({image, style}) => {
+const ImageLoader = ({image, style, name}) => {
   const [isImgLoaded, setIsImgLoaded] = useState(false);
   const handleImageLoaded = () => {
     setIsImgLoaded(true);
