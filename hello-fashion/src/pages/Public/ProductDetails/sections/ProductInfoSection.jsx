@@ -134,7 +134,7 @@ const ProductInfoSection = () => {
                       </Badge>
                     </span>
 
-                    {productDetails?.product &&
+                    {/*{productDetails?.product &&
                       productDetails?.product?.subcategories?.length > 0 && (
                         <span className="mt-2">
                           SUBCATEGORIES -{" "}
@@ -150,7 +150,7 @@ const ProductInfoSection = () => {
                             )
                           )}
                         </span>
-                      )}
+                      )}*/}
                   </div>
                 </ListGroupItem>
                 {/* Price - Discount */}

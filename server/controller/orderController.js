@@ -10,12 +10,12 @@ import {
 } from "../utils/refactorControllers.utils.js";
 import asyncHandler from "../utils/asyncHandler.utils.js";
 import APIError from "../utils/apiError.utils.js";
-import {PAYMENT_METHODS, USER_ROLES} from "../constants/index";
+import {PAYMENT_METHODS, USER_ROLES} from "../constants/index.js";
 import {calcCartTotalPrice} from "./cartController.js";
 import dotenv from "dotenv";
 dotenv.config();
 import Stripe from "stripe";
-// const stripe = Stripe(process.env.STRIPE_SECRET_KEY);
+const stripe = Stripe(process.env.STRIPE_SECRET_KEY);
 
 /* [ findById() then save() VS findByIdAndUpdate() ]
 The main difference is that when you use findById and save, you first get the object from MongoDB and then update whatever you want to and then save. This is ok when you don't need to worry about parallelism or multiple queries to the same object.

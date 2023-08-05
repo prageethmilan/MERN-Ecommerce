@@ -9,6 +9,7 @@ import mongoSanitize from "express-mongo-sanitize";
 import routes from './routes/index.js';
 import APIError from "./utils/apiError.utils.js";
 import connectToDB from "./config/db.js";
+import {webhookCheckout} from "./controller/orderController.js";
 
 dotenv.config();
 const app = express();
@@ -31,6 +32,12 @@ const server = app.listen(PORT, () => {
 
 const currentDirPath = path.dirname(fileURLToPath(import.meta.url));
 app.use(express.static(path.join(currentDirPath, "uploads")));
+
+app.post(
+    "/api/webhook",
+    express.raw({type: "application/json"}),
+    webhookCheckout
+);
 
 //Helmet helps you secure your Express apps by setting various HTTP headers
 app.use(helmet());

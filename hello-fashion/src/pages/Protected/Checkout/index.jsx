@@ -200,12 +200,12 @@ const Checkout = () => {
                       : "black",
                   }}
                 >
-                  Cart Subtotal : ${userCart.cart?.totalPrice}
+                  Cart Subtotal : Rs.{userCart.cart?.totalPrice}
                 </span>
                 {userCart.cart?.totalPriceAfterCouponDiscount > 0 && (
                   <span>
                     {" "}
-                    Cart Subtotal After Discount : $
+                    Cart Subtotal After Discount : Rs.
                     {userCart.cart?.totalPriceAfterCouponDiscount}
                   </span>
                 )}
@@ -231,6 +231,7 @@ const Checkout = () => {
                   </div>
                   <div>
                     <Input
+                        disabled={true}
                       onChange={(e) => {
                         handlePaymentMethod(e.target.value);
                       }}

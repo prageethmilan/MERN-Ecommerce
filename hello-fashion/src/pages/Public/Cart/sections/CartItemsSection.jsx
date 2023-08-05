@@ -97,11 +97,11 @@ const CartItemsSection = () => {
                           : "black",
                       }}
                     >
-                      Cart Subtotal: $ {userCart.cart?.totalPrice}
+                      Cart Subtotal: Rs. {userCart.cart?.totalPrice}
                     </p>
                     {userCart.cart?.totalPriceAfterCouponDiscount > 0 && (
                       <p style={{color: "red", fontFamily: "sans-serif"}}>
-                        Cart Subtotal After Discount: ${" "}
+                        Cart Subtotal After Discount: Rs.{" "}
                         {userCart.cart?.totalPriceAfterCouponDiscount}
                       </p>
                     )}

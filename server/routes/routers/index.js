@@ -7,7 +7,6 @@ import categoryRouter from "./categoryRouter.js";
 import orderRouter from "./orderRouter.js";
 import productRouter from "./productRouter.js";
 import reviewRouter from "./reviewRouter.js";
-import subCategoryRouter from "./subCategoryRouter.js";
 import userRouter from "./userRouter.js";
 import wishListRouter from "./wishListRouter.js";
 
@@ -17,7 +16,6 @@ router.use(`/users`, userRouter);
 router.use(`/auth`, authRouter);
 router.use(`/products`, productRouter);
 router.use(`/categories`, categoryRouter);
-router.use(`/subcategories`, subCategoryRouter);
 router.use(`/reviews`, reviewRouter);
 router.use(`/wishlist`, wishListRouter);
 router.use(`/cart`, cartRouter);

@@ -16,11 +16,8 @@ import {
     updateCategoryValidator,
     deleteCategoryValidator,
 } from "../../validators/category.validator.js";
-import subcategoryRouter from "./subcategoryRouter.js";
 
 const router = express.Router();
-// NESTED_ROUTES_[GET subcategories which belongs to specific category, CREATE a subcategory based on a specific category]
-router.use("/:categoryId/subcategories", subcategoryRouter);
 
 router
     .route("/")

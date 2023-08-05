@@ -1,6 +1,5 @@
 import validatorMiddleware from "../middleware/validator.middleware.js";
 import {check} from "express-validator";
-import Subcategory from "../model/subcategoryModel.js";
 import Category from "../model/categoryModel.js";
 import {isExistInDB, isLower} from "./custom.validators.js";
 
@@ -80,54 +79,54 @@ export const updateProductValidator = [
     .custom((val) => isExistInDB(val, Category)),
 
   // SUBCATEGORIES
-  check("subcategories")
-    .optional()
-    .isArray()
-    .withMessage("Product subcategories must be array")
-    // CHECK if the subcategories ids is exist in DB
-    /*
-    $in
-    Syntax: { field: { $in: [<value1>, <value2>, ... <valueN> ] } }
-    Description: The $in operator selects the documents where the value of a field equals any value in the specified array.
-    */
-    /*
-    $exists
-    Syntax: { field: { $exists: <boolean> } }
-    Description: When <boolean> is true, matches the documents that contain the field, including documents where the field value is null. If <boolean> is false, the query returns only the documents that do not contain the field.
-    */
-    .custom(async (subcategoriesIdsArray) => {
-      const listOfSubcategoriesIds = await Subcategory.find({
-        _id: {$exists: true, $in: subcategoriesIdsArray},
-      });
-      if (
-        listOfSubcategoriesIds.length < 1 ||
-        listOfSubcategoriesIds.length !== subcategoriesIdsArray.length
-      ) {
-        throw new Error(`Invalid subcategories ids`);
-      }
-    })
-    //Check if subCategories belong to the category which entered
-    .custom(async (subCategoriesIdsArray, {req}) => {
-      // 1) Find All Subcategories to The Category that entered to product
-      const subCategories = await Subcategory.find({
-        category: req.body.category,
-      }).select("_id");
-      // 2) We need only ids of subcategories so, we push them to this array
-      const subCategoriesIdsInDB = [];
-      subCategories.forEach((subCategory) =>
-        subCategoriesIdsInDB.push(subCategory._id.toString())
-      );
-      // 3) Check if every element of subCategoriesIdsArray which iam entered , in subCategoriesIdsInDB
-      if (
-        !subCategoriesIdsArray.every((val) =>
-          subCategoriesIdsInDB.includes(val)
-        )
-      ) {
-        throw new Error(
-          `Subcategories do not Belong to the category which you entered`
-        );
-      }
-    }),
+  // check("subcategories")
+  //   .optional()
+  //   .isArray()
+  //   .withMessage("Product subcategories must be array")
+  //   // CHECK if the subcategories ids is exist in DB
+  //   /*
+  //   $in
+  //   Syntax: { field: { $in: [<value1>, <value2>, ... <valueN> ] } }
+  //   Description: The $in operator selects the documents where the value of a field equals any value in the specified array.
+  //   */
+  //   /*
+  //   $exists
+  //   Syntax: { field: { $exists: <boolean> } }
+  //   Description: When <boolean> is true, matches the documents that contain the field, including documents where the field value is null. If <boolean> is false, the query returns only the documents that do not contain the field.
+  //   */
+  //   .custom(async (subcategoriesIdsArray) => {
+  //     const listOfSubcategoriesIds = await Subcategory.find({
+  //       _id: {$exists: true, $in: subcategoriesIdsArray},
+  //     });
+  //     if (
+  //       listOfSubcategoriesIds.length < 1 ||
+  //       listOfSubcategoriesIds.length !== subcategoriesIdsArray.length
+  //     ) {
+  //       throw new Error(`Invalid subcategories ids`);
+  //     }
+  //   })
+  //   //Check if subCategories belong to the category which entered
+  //   .custom(async (subCategoriesIdsArray, {req}) => {
+  //     // 1) Find All Subcategories to The Category that entered to product
+  //     const subCategories = await Subcategory.find({
+  //       category: req.body.category,
+  //     }).select("_id");
+  //     // 2) We need only ids of subcategories so, we push them to this array
+  //     const subCategoriesIdsInDB = [];
+  //     subCategories.forEach((subCategory) =>
+  //       subCategoriesIdsInDB.push(subCategory._id.toString())
+  //     );
+  //     // 3) Check if every element of subCategoriesIdsArray which iam entered , in subCategoriesIdsInDB
+  //     if (
+  //       !subCategoriesIdsArray.every((val) =>
+  //         subCategoriesIdsInDB.includes(val)
+  //       )
+  //     ) {
+  //       throw new Error(
+  //         `Subcategories do not Belong to the category which you entered`
+  //       );
+  //     }
+  //   }),
   validatorMiddleware,
 ];
 export const createProductValidator = [
@@ -202,54 +201,54 @@ export const createProductValidator = [
     .custom((val) => isExistInDB(val, Category)),
 
   // SUBCATEGORIES
-  check("subcategories")
-    .optional()
-    .isArray()
-    .withMessage("Product subcategories must be array")
-    // CHECK if the subcategories ids is exist in DB
-    /*
-    $in
-    Syntax: { field: { $in: [<value1>, <value2>, ... <valueN> ] } }
-    Description: The $in operator selects the documents where the value of a field equals any value in the specified array.
-    */
-    /*
-    $exists
-    Syntax: { field: { $exists: <boolean> } }
-    Description: When <boolean> is true, matches the documents that contain the field, including documents where the field value is null. If <boolean> is false, the query returns only the documents that do not contain the field.
-    */
-    .custom(async (subcategoriesIdsArray) => {
-      const listOfSubcategoriesIds = await Subcategory.find({
-        _id: {$exists: true, $in: subcategoriesIdsArray},
-      });
-      if (
-        listOfSubcategoriesIds.length < 1 ||
-        listOfSubcategoriesIds.length !== subcategoriesIdsArray.length
-      ) {
-        throw new Error(`Invalid subcategories ids`);
-      }
-    })
-    //Check if subCategories belong to the category which entered
-    .custom(async (subCategoriesIdsArray, {req}) => {
-      // 1) Find All Subcategories of The Category that entered to product
-      const subCategories = await Subcategory.find({
-        category: req.body.category,
-      }).select("_id");
-
-      // 2) We need only ids of subcategories so, we push them to this array
-      const subCategoriesIdsInDB = [];
-      subCategories.forEach((subCategory) =>
-        subCategoriesIdsInDB.push(subCategory._id.toString())
-      );
-      // 3) Check if every element of subCategoriesIdsArray which iam entered , in subCategoriesIdsInDB
-      if (
-        !subCategoriesIdsArray.every((val) =>
-          subCategoriesIdsInDB.includes(val)
-        )
-      ) {
-        throw new Error(
-          `Subcategories do not Belong to the category which you entered`
-        );
-      }
-    }),
+  // check("subcategories")
+  //   .optional()
+  //   .isArray()
+  //   .withMessage("Product subcategories must be array")
+  //   // CHECK if the subcategories ids is exist in DB
+  //   /*
+  //   $in
+  //   Syntax: { field: { $in: [<value1>, <value2>, ... <valueN> ] } }
+  //   Description: The $in operator selects the documents where the value of a field equals any value in the specified array.
+  //   */
+  //   /*
+  //   $exists
+  //   Syntax: { field: { $exists: <boolean> } }
+  //   Description: When <boolean> is true, matches the documents that contain the field, including documents where the field value is null. If <boolean> is false, the query returns only the documents that do not contain the field.
+  //   */
+  //   .custom(async (subcategoriesIdsArray) => {
+  //     const listOfSubcategoriesIds = await Subcategory.find({
+  //       _id: {$exists: true, $in: subcategoriesIdsArray},
+  //     });
+  //     if (
+  //       listOfSubcategoriesIds.length < 1 ||
+  //       listOfSubcategoriesIds.length !== subcategoriesIdsArray.length
+  //     ) {
+  //       throw new Error(`Invalid subcategories ids`);
+  //     }
+  //   })
+  //   //Check if subCategories belong to the category which entered
+  //   .custom(async (subCategoriesIdsArray, {req}) => {
+  //     // 1) Find All Subcategories of The Category that entered to product
+  //     const subCategories = await Subcategory.find({
+  //       category: req.body.category,
+  //     }).select("_id");
+  //
+  //     // 2) We need only ids of subcategories so, we push them to this array
+  //     const subCategoriesIdsInDB = [];
+  //     subCategories.forEach((subCategory) =>
+  //       subCategoriesIdsInDB.push(subCategory._id.toString())
+  //     );
+  //     // 3) Check if every element of subCategoriesIdsArray which iam entered , in subCategoriesIdsInDB
+  //     if (
+  //       !subCategoriesIdsArray.every((val) =>
+  //         subCategoriesIdsInDB.includes(val)
+  //       )
+  //     ) {
+  //       throw new Error(
+  //         `Subcategories do not Belong to the category which you entered`
+  //       );
+  //     }
+  //   }),
   validatorMiddleware,
 ];

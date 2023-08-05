@@ -20,7 +20,7 @@ export const calcCartTotalPrice = (cart) => {
 export const getMyCart = asyncHandler(async (req, res, next) => {
   const cart = await Cart.findOne({user: req.user._id}).populate({
     path: "cartItems.product",
-    select: "name image quantityInStock -category -subcategories",
+    select: "name image quantityInStock -category",
   });
   if (!cart) {
     return next(new APIError("There is no cart match this user", 404));
